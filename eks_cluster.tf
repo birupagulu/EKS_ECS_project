@@ -37,3 +37,9 @@ resource "aws_eks_cluster" "my_cluster" {
     security_group_ids = [data.aws_security_group.existing_security_group.id]
   }
 }
+
+resource "local_file" "deployment" {
+  filename = "${path.module}/kubernetes/deployment.yml"
+  content  = file("${path.module}/kubernetes/deployment.yml")
+}
+
