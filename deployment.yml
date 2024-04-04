@@ -1,18 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ubuntu-deployment
+  name: nginx-deployment
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      app: ubuntu-app
+      app: nginx-deployment
+  replicas: 2
   template:
     metadata:
       labels:
-        app: ubuntu-app
+        app: nginx-deployment
     spec:
       containers:
-      - name: ubuntu-container
-        image: public.ecr.aws/d3u5b0p9/ecs-ecr-service:latest
-        command: ["sleep", "3600"]  # Command to keep the container running
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 80
